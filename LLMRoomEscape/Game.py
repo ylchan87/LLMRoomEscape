@@ -19,15 +19,15 @@ class GameState:
         self.door_opened = False
 
         self.game_items = {
-            "Key"   : GameItem("Key"  ,  "A fancy blue key",          "Drawer"),
-            "Box"   : GameItem("Box"  ,  "A fancy blue treasure box", "Bed"),
-            "Paper" : GameItem("Paper", f"A piece of paper with '{self.door_pw}' written on it", "Box"),
+            "key"   : GameItem("key"  ,  "A fancy blue key",          "drawer"),
+            "box"   : GameItem("box"  ,  "A fancy blue treasure box", "bed"),
+            "paper" : GameItem("paper", f"A piece of paper with '{self.door_pw}' written on it", "box"),
         }
 
         self.player_inventory : List[GameItem] = []
         self.player_history   : List[Tuple[str,str,str]] = []  # action, action_args, result
 
-        self.locations = ["Bed", "Drawer"]
+        self.locations = ["bed", "drawer"]
 
 class GameLogic:
     def __init__(self, gameState: GameState) -> None:
@@ -39,6 +39,9 @@ class GameLogic:
         """
         inspect a location
         """
+        if location == "":
+            return f"Please specify a location"
+        
         if location not in self.game_state.locations:
             return f"No {location} is around"
         
@@ -48,6 +51,9 @@ class GameLogic:
                 result += f"You found a {item.name}\n"
                 item.location = "Inventory"
                 self.game_state.player_inventory.append(item)
+        
+        if result == "":
+            result = f"Nothing new is found around {location}"
 
         return result
     
@@ -66,11 +72,11 @@ class GameLogic:
     
     def unlock_box(self):
         """
-        try unlock the main door of the room
+        try unlock the box
         """
-        box   = self.game_state.game_items["Box"]
-        key   = self.game_state.game_items["Key"]
-        paper = self.game_state.game_items["Paper"]
+        box   = self.game_state.game_items["box"]
+        key   = self.game_state.game_items["key"]
+        paper = self.game_state.game_items["paper"]
         if box not in self.game_state.player_inventory:
             return "You don't have a box"
         elif key not in self.game_state.player_inventory:
@@ -85,7 +91,7 @@ class GameLogic:
             self.unlock_door,
         ]
 
-        box = self.game_state.game_items["Box"]
+        box = self.game_state.game_items["box"]
         if box in self.game_state.player_inventory:
             possible_actions.append(self.unlock_box)
             

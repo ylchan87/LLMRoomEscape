@@ -15,12 +15,12 @@ class TestGameFlow(unittest.TestCase):
         self.gameState.reset()
         
         player = AgentScripted([
-            ("inspect"    , {'location': 'Bed'}),  # get box
+            ("inspect"    , {'location': 'bed'}),  # get box
             ("unlock_box" , {}),
         ])
 
         game_loop(player, self.gameLogic, self.gameState, maxIter=10)
-        self.assertEqual("Paper" in self.gameState.player_inventory, False)
+        self.assertEqual("paper" in self.gameState.player_inventory, False)
 
 
     def test_can_escape(self):
@@ -29,8 +29,8 @@ class TestGameFlow(unittest.TestCase):
         self.gameState.door_pw
 
         player = AgentScripted([
-            ("inspect"    , {'location': 'Bed'}),
-            ("inspect"    , {'location': 'Drawer'}),
+            ("inspect"    , {'location': 'bed'}),
+            ("inspect"    , {'location': 'drawer'}),
             ("unlock_box" , {}),
             ("unlock_door", {'password': self.gameState.door_pw}),
         ])
