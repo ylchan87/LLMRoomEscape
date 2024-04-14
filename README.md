@@ -19,4 +19,9 @@ python3 -m pip install -r requirements.txt
 ```
 
 # Test
-python -m unittest discover -v
+`python -m unittest discover -v`
+
+# Play
+`python3 LLMRoomEscape/main.py`
+
+edit `main.py` to let AI or human to play
