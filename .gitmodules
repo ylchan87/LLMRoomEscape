@@ -1,0 +1,3 @@
+[submodule "ext_deps/ChatGLM3"]
+	path = ext_deps/ChatGLM3
+	url = https://github.com/THUDM/ChatGLM3

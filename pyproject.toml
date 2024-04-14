@@ -1,0 +1,12 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "LLMRoomEscape"
+version = "0.1"
+dependencies = [
+]
+
+[tool.setuptools.packages]
+find = {}  # Scan the project directory with the default parameters
